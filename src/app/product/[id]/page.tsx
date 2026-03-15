@@ -3,6 +3,7 @@
 import { useListingStore } from '@/store/listingStore';
 import { useWishlistStore } from '@/store/wishlistStore';
 import { useAuthStore } from '@/store/authStore';
+import { useCartStore } from '@/store/cartStore';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -15,6 +16,7 @@ export default function ProductDetailsPage() {
   const router = useRouter();
   const { coins } = useListingStore();
   const { wishlistItems, addToWishlist, removeFromWishlist } = useWishlistStore();
+  const { addToCart } = useCartStore();
   const { user } = useAuthStore();
   const [isZoomed, setIsZoomed] = useState(false);
 
@@ -42,6 +44,9 @@ export default function ProductDetailsPage() {
   const handleActionClick = () => {
     if (!user) {
       router.push('/login');
+    } else {
+      addToCart(coin);
+      router.push('/cart');
     }
   };
 

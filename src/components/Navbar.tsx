@@ -5,11 +5,15 @@ import { useAuthStore } from '@/store/authStore';
 import { LogOut, User as UserIcon, Heart, Search, ShoppingBag, Menu } from 'lucide-react';
 import { useState } from 'react';
 import { useWishlistStore } from '@/store/wishlistStore';
+import { useCartStore } from '@/store/cartStore';
 
 export default function Navbar() {
   const { user, logout } = useAuthStore();
   const { wishlistItems } = useWishlistStore();
+  const { cartItems } = useCartStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <nav className="bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 z-50">
@@ -37,6 +41,14 @@ export default function Navbar() {
                   {wishlistItems.length > 0 && (
                     <span className="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-red-600 rounded-full">
                       {wishlistItems.length}
+                    </span>
+                  )}
+                </Link>
+                <Link href="/cart" className="p-2 text-zinc-400 hover:text-zinc-500 relative transition-colors">
+                  <ShoppingBag className="h-5 w-5" />
+                  {totalCartItems > 0 && (
+                    <span className="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-amber-600 rounded-full">
+                      {totalCartItems}
                     </span>
                   )}
                 </Link>
@@ -88,6 +100,7 @@ export default function Navbar() {
                   </>
                 )}
                 <Link href="/wishlist" className="block px-3 py-2 text-base font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-900">Wishlist ({wishlistItems.length})</Link>
+                <Link href="/cart" className="block px-3 py-2 text-base font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-900">Cart ({totalCartItems})</Link>
                 <Link href="/messages" className="block px-3 py-2 text-base font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-900">Messages</Link>
                 <Link href="/profile" className="block px-3 py-2 text-base font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-900">Profile</Link>
                 <button onClick={logout} className="block w-full text-left px-3 py-2 text-base font-medium text-red-600 hover:bg-red-50 dark:hover:bg-red-900/10">Logout</button>
