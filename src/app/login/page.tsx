@@ -27,11 +27,11 @@ export default function LoginPage() {
     const user = storedUsers.find((u: any) => u.email === email && u.password === password);
 
     if (user) {
-      login({ id: user.id, name: user.name, email: user.email });
+      login({ id: user.id, name: user.name, email: user.email, role: user.role || 'buyer' });
       router.push('/profile');
     } else if (email === 'dhanush@example.com' && password === 'password') {
       // Fallback dummy user based on instructions
-      login({ id: 'user_1', name: 'Dhanush', email: 'dhanush@example.com' });
+      login({ id: 'user_1', name: 'Dhanush', email: 'dhanush@example.com', role: 'both' });
       router.push('/profile');
     } else {
       setError('Invalid credentials. Please register if you do not have an account.');

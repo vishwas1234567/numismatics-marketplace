@@ -21,7 +21,7 @@ export default function Navbar() {
             </Link>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
               <Link href="/marketplace" className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white px-3 py-2 text-sm font-medium transition-colors">Marketplace</Link>
-              {user && (
+              {user && (user.role === 'seller' || user.role === 'both') && (
                 <>
                   <Link href="/sell" className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white px-3 py-2 text-sm font-medium transition-colors">Sell</Link>
                   <Link href="/collection" className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white px-3 py-2 text-sm font-medium transition-colors">My Collection</Link>
@@ -81,8 +81,12 @@ export default function Navbar() {
             <Link href="/marketplace" className="block px-3 py-2 text-base font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-900">Marketplace</Link>
             {user ? (
               <>
-                <Link href="/sell" className="block px-3 py-2 text-base font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-900">Sell</Link>
-                <Link href="/collection" className="block px-3 py-2 text-base font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-900">My Collection</Link>
+                {(user.role === 'seller' || user.role === 'both') && (
+                  <>
+                    <Link href="/sell" className="block px-3 py-2 text-base font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-900">Sell</Link>
+                    <Link href="/collection" className="block px-3 py-2 text-base font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-900">My Collection</Link>
+                  </>
+                )}
                 <Link href="/wishlist" className="block px-3 py-2 text-base font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-900">Wishlist ({wishlistItems.length})</Link>
                 <Link href="/messages" className="block px-3 py-2 text-base font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-900">Messages</Link>
                 <Link href="/profile" className="block px-3 py-2 text-base font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-900">Profile</Link>

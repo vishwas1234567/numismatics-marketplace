@@ -32,6 +32,8 @@ export default function CollectionPage() {
   useEffect(() => {
     if (!user) {
       router.push('/login');
+    } else if (user.role === 'buyer') {
+      router.push('/profile');
     }
   }, [user, router]);
 

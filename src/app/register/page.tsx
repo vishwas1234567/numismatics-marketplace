@@ -11,6 +11,7 @@ export default function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState<'buyer' | 'seller' | 'both'>('buyer');
   const [error, setError] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -28,12 +29,12 @@ export default function RegisterPage() {
       return;
     }
 
-    const newUser = { id: `user_${Date.now()}`, name, email, password };
+    const newUser = { id: `user_${Date.now()}`, name, email, password, role };
     storedUsers.push(newUser);
     localStorage.setItem('registered_users', JSON.stringify(storedUsers));
     
     // Auto login
-    login({ id: newUser.id, name: newUser.name, email: newUser.email });
+    login({ id: newUser.id, name: newUser.name, email: newUser.email, role: newUser.role });
     router.push('/profile');
   };
 
@@ -102,6 +103,23 @@ export default function RegisterPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   className="appearance-none block w-full px-4 py-3 border border-zinc-300 dark:border-zinc-700 rounded-xl shadow-sm placeholder-zinc-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500 bg-white dark:bg-zinc-900 dark:text-white transition-colors"
                 />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+                I am here to
+              </label>
+              <div className="mt-1 relative">
+                <select
+                  value={role}
+                  onChange={(e) => setRole(e.target.value as any)}
+                  className="appearance-none block w-full px-4 py-3 border border-zinc-300 dark:border-zinc-700 rounded-xl shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 bg-white dark:bg-zinc-900 dark:text-white transition-colors"
+                >
+                  <option value="buyer">Buy Rare Items</option>
+                  <option value="seller">Sell My Collection</option>
+                  <option value="both">Both Buy and Sell</option>
+                </select>
               </div>
             </div>
 

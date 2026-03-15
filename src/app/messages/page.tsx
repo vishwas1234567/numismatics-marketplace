@@ -41,7 +41,9 @@ export default function MessagesPage() {
       {/* Sidebar - Conversations List */}
       <div className={`w-full sm:w-1/3 lg:w-1/4 bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800 flex flex-col ${activeChat ? 'hidden sm:flex' : 'flex'}`}>
         <div className="p-4 border-b border-zinc-200 dark:border-zinc-800">
-          <h1 className="text-xl font-bold font-black text-zinc-900 dark:text-white mb-4">Messages</h1>
+          <h1 className="text-xl font-bold font-black text-zinc-900 dark:text-white mb-4">
+            {user.role === 'buyer' ? 'Buying Inquiries' : user.role === 'seller' ? 'Selling Inquiries' : 'All Messages'}
+          </h1>
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 h-5 w-5" />
             <input 

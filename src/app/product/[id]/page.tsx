@@ -6,7 +6,7 @@ import { useAuthStore } from '@/store/authStore';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, MessageSquare, Heart, ShieldCheck, HelpCircle } from 'lucide-react';
+import { ArrowLeft, MessageSquare, Heart, ShieldCheck, HelpCircle, User as UserIcon } from 'lucide-react';
 import { useState, MouseEvent } from 'react';
 import { formatCurrency } from '@/utils/helpers';
 
@@ -106,6 +106,11 @@ export default function ProductDetailsPage() {
                 {formatCurrency(coin.price)}
               </div>
               
+              <div className="flex items-center gap-2 mb-6 mt-[-1rem] text-sm text-zinc-500">
+                <UserIcon className="h-4 w-4" /> 
+                <span>Listed by <span className="font-semibold text-amber-600 hover:underline cursor-pointer">{coin.sellerId}</span></span>
+              </div>
+              
               <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-8 leading-relaxed">
                 {coin.description || "A magnificent historical artifact perfect for any serious collection."}
               </p>
@@ -149,23 +154,29 @@ export default function ProductDetailsPage() {
               </div>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button 
-                onClick={handleActionClick} 
-                className="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-amber-600/20 hover:shadow-amber-600/40 hover:-translate-y-1 transition-all"
-              >
-                Buy Now
-              </button>
-              <button 
-                onClick={() => {
-                  if(!user) router.push('/login');
-                  else router.push('/messages');
-                }} 
-                className="flex-1 bg-white hover:bg-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white font-bold py-4 rounded-xl border border-zinc-200 dark:border-zinc-700 flex items-center justify-center gap-2 hover:-translate-y-1 transition-all"
-              >
-                <MessageSquare className="h-5 w-5" /> Contact Seller
-              </button>
-            </div>
+            {user?.id === coin.sellerId ? (
+              <div className="flex bg-amber-50 dark:bg-amber-900/10 p-4 rounded-xl border border-amber-200 dark:border-amber-900/30 text-amber-800 dark:text-amber-200 justify-center font-medium shadow-sm">
+                This is your active listing.
+              </div>
+            ) : (
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button 
+                  onClick={handleActionClick} 
+                  className="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-amber-600/20 hover:shadow-amber-600/40 hover:-translate-y-1 transition-all"
+                >
+                  Buy Now
+                </button>
+                <button 
+                  onClick={() => {
+                    if(!user) router.push('/login');
+                    else router.push('/messages');
+                  }} 
+                  className="flex-1 bg-white hover:bg-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white font-bold py-4 rounded-xl border border-zinc-200 dark:border-zinc-700 flex items-center justify-center gap-2 hover:-translate-y-1 transition-all"
+                >
+                  <MessageSquare className="h-5 w-5" /> Contact Seller
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -33,6 +33,8 @@ export default function SellPage() {
   useEffect(() => {
     if (!user) {
       router.push('/login');
+    } else if (user.role === 'buyer') {
+      router.push('/profile');
     }
   }, [user, router]);
 
