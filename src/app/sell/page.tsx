@@ -25,6 +25,7 @@ export default function SellPage() {
     price: '',
     rarity: 'Common' as RarityLevel,
     certification: '',
+    image: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -63,10 +64,7 @@ export default function SellPage() {
       description: formData.description,
       price: parseFloat(formData.price) || 0,
       rarity: formData.rarity,
-      // Mock realistic image URLs based on category
-      image: formData.category === 'Banknotes' 
-        ? '/images/banknote.png'
-        : '/images/sovereign.png',
+      image: formData.image || '/images/rupee.png', // Default fallback if they leave it empty
       sellerId: user.id,
       certification: formData.certification
     };
@@ -110,17 +108,10 @@ export default function SellPage() {
           <form onSubmit={handleSubmit} className="p-8">
             <div className="space-y-8">
               
-              {/* Image Upload Mock */}
+              {/* Image Input */}
               <div>
-                <label className="block text-sm font-semibold text-zinc-900 dark:text-white mb-3">Item Images</label>
-                <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-10 flex flex-col items-center justify-center bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer group">
-                  <div className="p-4 bg-amber-50 dark:bg-amber-900/20 rounded-full text-amber-600 dark:text-amber-500 mb-4 group-hover:scale-110 transition-transform">
-                    <UploadCloud className="h-8 w-8" />
-                  </div>
-                  <p className="text-sm font-medium text-zinc-900 dark:text-zinc-200">Click to upload or drag and drop</p>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2">SVG, PNG, JPG (max. 5MB)</p>
-                  <p className="text-xs text-amber-600 mt-4">(Mock uploader: uses dummy image)</p>
-                </div>
+                <label className="block text-sm font-semibold text-zinc-900 dark:text-white mb-2">Item Image URL <span className="text-zinc-400 font-normal">(Optional)</span></label>
+                <input name="image" value={formData.image} onChange={handleChange} className="w-full p-4 border border-zinc-300 dark:border-zinc-700 rounded-xl bg-transparent dark:text-white focus:ring-2 focus:ring-amber-500 outline-none transition-all placeholder:text-zinc-400" placeholder="e.g. /images/rupee.png or https://example.com/coin.jpg" />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

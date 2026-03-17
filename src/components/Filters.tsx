@@ -12,26 +12,19 @@ export interface FilterState {
 }
 
 interface FiltersProps {
+  filters: FilterState;
   onFilterChange: (filters: FilterState) => void;
   categories: string[];
   metals: string[];
   conditions: string[];
 }
 
-export default function Filters({ onFilterChange, categories, metals, conditions }: FiltersProps) {
+export default function Filters({ filters, onFilterChange, categories, metals, conditions }: FiltersProps) {
   const [openSection, setOpenSection] = useState<{ [key: string]: boolean }>({
     category: true,
     metal: true,
     condition: true,
     price: true,
-  });
-
-  const [filters, setFilters] = useState<FilterState>({
-    category: [],
-    metal: [],
-    condition: [],
-    yearRange: [-1000, 2026],
-    priceRange: [0, 500000],
   });
 
   const toggleSection = (section: string) => {
@@ -44,7 +37,6 @@ export default function Filters({ onFilterChange, categories, metals, conditions
       : [...filters[section], value];
 
     const newFilters = { ...filters, [section]: updated };
-    setFilters(newFilters);
     onFilterChange(newFilters);
   };
 
@@ -57,7 +49,6 @@ export default function Filters({ onFilterChange, categories, metals, conditions
             const reset = {
               category: [], metal: [], condition: [], yearRange: [-1000, 2026] as [number, number], priceRange: [0, 500000] as [number, number]
             };
-            setFilters(reset);
             onFilterChange(reset);
           }}
           className="text-sm text-zinc-500 hover:text-amber-600 transition-colors"
@@ -118,7 +109,6 @@ export default function Filters({ onFilterChange, categories, metals, conditions
               value={filters.priceRange[0]}
               onChange={(e) => {
                 const newRange: [number, number] = [Number(e.target.value), filters.priceRange[1]];
-                setFilters({ ...filters, priceRange: newRange });
                 onFilterChange({ ...filters, priceRange: newRange });
               }}
             />
@@ -130,7 +120,6 @@ export default function Filters({ onFilterChange, categories, metals, conditions
               value={filters.priceRange[1]}
               onChange={(e) => {
                 const newRange: [number, number] = [filters.priceRange[0], Number(e.target.value)];
-                setFilters({ ...filters, priceRange: newRange });
                 onFilterChange({ ...filters, priceRange: newRange });
               }}
             />

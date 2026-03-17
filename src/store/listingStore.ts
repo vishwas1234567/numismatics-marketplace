@@ -21,6 +21,20 @@ export const useListingStore = create<ListingState>()(
           coins: state.coins.map((c) => (c.id === id ? { ...c, ...updates } : c)),
         })),
     }),
-    { name: 'market_listings' }
+    { 
+      name: 'market_listings',
+      version: 1,
+      migrate: (persistedState: any, version: number) => {
+        if (version === 0) {
+          const mapping: Record<string, string> = { "seller_1": "james", "seller_2": "peter", "seller_3": "michael", "seller_4": "david", "seller_5": "sarah" };
+          const mappedCoins = (persistedState.coins || []).map((c: any) => ({
+            ...c,
+            sellerId: mapping[c.sellerId] || c.sellerId
+          }));
+          return { ...persistedState, coins: mappedCoins };
+        }
+        return persistedState;
+      }
+    }
   )
 );

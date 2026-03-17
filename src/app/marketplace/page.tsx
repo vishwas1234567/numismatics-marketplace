@@ -4,13 +4,18 @@ import { useListingStore } from '@/store/listingStore';
 import ProductCard from '@/components/ProductCard';
 import SearchBar from '@/components/SearchBar';
 import Filters, { FilterState } from '@/components/Filters';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 
-export default function MarketplacePage() {
+function MarketplaceContent() {
+  const searchParams = useSearchParams();
+  const initialCategory = searchParams.get('category');
+  const initialQuery = searchParams.get('q');
+
   const { coins } = useListingStore();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(initialQuery || '');
   const [filters, setFilters] = useState<FilterState>({
-    category: [],
+    category: initialCategory ? [initialCategory] : [],
     metal: [],
     condition: [],
     yearRange: [-1000, 2026],
@@ -55,7 +60,7 @@ export default function MarketplacePage() {
             <p className="text-zinc-500 dark:text-zinc-400">Discover hundreds of rare coins, banknotes and medals.</p>
           </div>
           <div className="w-full md:w-96">
-            <SearchBar onSearch={setSearchQuery} />
+            <SearchBar onSearch={setSearchQuery} initialQuery={initialQuery || ''} />
           </div>
         </div>
 
@@ -63,6 +68,7 @@ export default function MarketplacePage() {
           {/* Sidebar */}
           <div className="w-full lg:w-1/4 flex-shrink-0">
             <Filters
+              filters={filters}
               onFilterChange={setFilters}
               categories={categories}
               metals={metals}
@@ -91,5 +97,13 @@ export default function MarketplacePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function MarketplacePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-zinc-500">Loading marketplace...</div>}>
+      <MarketplaceContent />
+    </Suspense>
   );
 }

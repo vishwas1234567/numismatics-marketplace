@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { ArrowLeft, MessageSquare, Heart, ShieldCheck, HelpCircle, User as UserIcon } from 'lucide-react';
 import { useState, MouseEvent } from 'react';
 import { formatCurrency } from '@/utils/helpers';
+import { dummySellers } from '@/data/sellers';
 
 export default function ProductDetailsPage() {
   const { id } = useParams();
@@ -22,6 +23,7 @@ export default function ProductDetailsPage() {
 
   const coin = coins.find((c) => c.id === id);
   const isWishlisted = coin ? wishlistItems.some((item) => item.id === coin.id) : false;
+  const seller = coin ? dummySellers.find((s) => s.id === coin.sellerId) : undefined;
 
   if (!coin) {
     return (
@@ -113,7 +115,7 @@ export default function ProductDetailsPage() {
               
               <div className="flex items-center gap-2 mb-6 mt-[-1rem] text-sm text-zinc-500">
                 <UserIcon className="h-4 w-4" /> 
-                <span>Listed by <span className="font-semibold text-amber-600 hover:underline cursor-pointer">{coin.sellerId}</span></span>
+                <span>Listed by <Link href={`/seller/${coin.sellerId}`} className="font-semibold text-amber-600 hover:underline cursor-pointer">{seller?.name || coin.sellerId}</Link></span>
               </div>
               
               <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-8 leading-relaxed">
@@ -174,7 +176,7 @@ export default function ProductDetailsPage() {
                 <button 
                   onClick={() => {
                     if(!user) router.push('/login');
-                    else router.push('/messages');
+                    else router.push(`/messages?sellerId=${coin.sellerId}&coinId=${coin.id}`);
                   }} 
                   className="flex-1 bg-white hover:bg-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white font-bold py-4 rounded-xl border border-zinc-200 dark:border-zinc-700 flex items-center justify-center gap-2 hover:-translate-y-1 transition-all"
                 >

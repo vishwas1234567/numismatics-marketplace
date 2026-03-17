@@ -27,6 +27,7 @@ export default function CollectionPage() {
     condition: 'Very Fine' as CoinCondition,
     price: '', // estimated value
     rarity: 'Common' as RarityLevel,
+    image: '',
   });
 
   useEffect(() => {
@@ -62,7 +63,7 @@ export default function CollectionPage() {
       condition: formData.condition,
       price: parseFloat(formData.price) || 0,
       rarity: formData.rarity,
-      image: '/images/sovereign.png',
+      image: formData.image || '/images/rupee.png',
       isForSale: false,
       sellerId: user.id
     };
@@ -110,6 +111,10 @@ export default function CollectionPage() {
                   <label className="block text-sm font-semibold text-zinc-900 dark:text-white mb-1">Estimated Value</label>
                   <input required type="number" name="price" value={formData.price} onChange={handleChange} className="w-full p-2.5 border border-zinc-300 dark:border-zinc-700 rounded-lg bg-transparent dark:text-white outline-none focus:border-amber-500" placeholder="0.00" />
                </div>
+               <div>
+                  <label className="block text-sm font-semibold text-zinc-900 dark:text-white mb-1">Image URL</label>
+                  <input name="image" value={formData.image} onChange={handleChange} className="w-full p-2.5 border border-zinc-300 dark:border-zinc-700 rounded-lg bg-transparent dark:text-white outline-none focus:border-amber-500" placeholder="e.g. /images/rupee.png" />
+               </div>
                <div className="md:col-span-4 flex justify-end gap-3 mt-2">
                  <button type="button" onClick={() => setShowAddForm(false)} className="px-4 py-2 text-zinc-500 hover:text-zinc-700 font-medium">Cancel</button>
                  <button type="submit" className="px-6 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-bold transition-colors">Save Item</button>
@@ -137,7 +142,15 @@ export default function CollectionPage() {
                       <Tag className="h-3 w-3" /> For Sale
                     </span>
                   )}
-                  <button onClick={() => removeItem(item.id)} className="absolute top-3 right-3 p-1.5 bg-white/80 dark:bg-black/50 hover:bg-red-100 dark:hover:bg-red-900/50 text-red-500 rounded-lg transition-colors shadow">
+                  <button 
+                    onClick={() => {
+                      removeItem(item.id);
+                      if (item.isForSale) {
+                        removeListing(item.id);
+                      }
+                    }} 
+                    className="absolute top-3 right-3 p-1.5 bg-white/80 dark:bg-black/50 hover:bg-red-100 dark:hover:bg-red-900/50 text-red-500 rounded-lg transition-colors shadow"
+                  >
                     <Trash2 className="h-4 w-4" />
                   </button>
                 </div>

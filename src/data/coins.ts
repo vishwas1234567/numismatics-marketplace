@@ -15,7 +15,7 @@ export const dummyCoins: Coin[] = [
     description: "The last silver rupee minted during British India.",
     weight: "11.66g",
     mint: "Bombay",
-    sellerId: "seller_1",
+    sellerId: "james",
     certification: "PCGS MS-62"
   },
   {
@@ -32,7 +32,7 @@ export const dummyCoins: Coin[] = [
     description: "An authentic silver denarius from the reign of Emperor Augustus.",
     weight: "3.8g",
     mint: "Rome",
-    sellerId: "seller_2",
+    sellerId: "peter",
     certification: "NGC Choice Fine"
   },
   {
@@ -49,7 +49,7 @@ export const dummyCoins: Coin[] = [
     description: "A beautiful, brilliant uncirculated Morgan dollar.",
     weight: "26.73g",
     mint: "San Francisco (S)",
-    sellerId: "seller_3",
+    sellerId: "michael",
   },
   {
     id: "coin_4",
@@ -65,7 +65,7 @@ export const dummyCoins: Coin[] = [
     description: "Full gold sovereign featuring King George V.",
     weight: "7.98g",
     mint: "London",
-    sellerId: "seller_1",
+    sellerId: "james",
   },
   {
     id: "coin_5",
@@ -81,7 +81,7 @@ export const dummyCoins: Coin[] = [
     description: "The famous 'Owl' of Athens, one of the most iconic ancient coins.",
     weight: "17.2g",
     mint: "Athens",
-    sellerId: "seller_4",
+    sellerId: "david",
     certification: "NGC Ch VF"
   },
   {
@@ -98,7 +98,7 @@ export const dummyCoins: Coin[] = [
     description: "One ounce of pure gold in this standard bullion coin.",
     weight: "33.93g",
     mint: "Rand Refinery",
-    sellerId: "seller_2",
+    sellerId: "peter",
   },
   {
     id: "coin_7",
@@ -112,7 +112,7 @@ export const dummyCoins: Coin[] = [
     rarity: "Scarce",
     image: "/images/banknote.png",
     description: "Hyperinflation note from Zimbabwe, highly collectible.",
-    sellerId: "seller_1",
+    sellerId: "james",
   },
   {
     id: "coin_8",
@@ -127,7 +127,7 @@ export const dummyCoins: Coin[] = [
     image: "/images/sovereign.png",
     description: "A replica of the most expensive coin ever sold.",
     weight: "33.4g",
-    sellerId: "seller_3",
+    sellerId: "michael",
   },
   {
     id: "coin_9",
@@ -143,7 +143,7 @@ export const dummyCoins: Coin[] = [
     description: "Gold solidus from the era of Heraclius.",
     weight: "4.5g",
     mint: "Constantinople",
-    sellerId: "seller_4",
+    sellerId: "david",
   },
   {
     id: "coin_10",
@@ -157,7 +157,7 @@ export const dummyCoins: Coin[] = [
     rarity: "Common",
     image: "/images/banknote.png",
     description: "The old 500 Rupee note demonetized in 2016.",
-    sellerId: "seller_5",
+    sellerId: "sarah",
   },
   {
     id: "coin_11",
@@ -173,7 +173,7 @@ export const dummyCoins: Coin[] = [
     description: "The classic pirate treasure coin, 8 Reales.",
     weight: "27g",
     mint: "Mexico City",
-    sellerId: "seller_2",
+    sellerId: "peter",
   },
   {
     id: "coin_12",
@@ -189,7 +189,7 @@ export const dummyCoins: Coin[] = [
     description: "High-purity silver bullion coin with advanced security features.",
     weight: "31.1g",
     mint: "Royal Canadian Mint",
-    sellerId: "seller_1",
+    sellerId: "james",
   },
   {
     id: "coin_13",
@@ -204,7 +204,7 @@ export const dummyCoins: Coin[] = [
     image: "/images/sovereign.png",
     description: "Medieval gold trade coin of Venice.",
     weight: "3.5g",
-    sellerId: "seller_4",
+    sellerId: "david",
   },
   {
     id: "coin_14",
@@ -219,7 +219,7 @@ export const dummyCoins: Coin[] = [
     image: "/images/denarius.png",
     description: "Pennies were made of steel in 1943 to save copper for WWII.",
     weight: "2.7g",
-    sellerId: "seller_3",
+    sellerId: "michael",
   },
   {
     id: "coin_15",
@@ -234,7 +234,7 @@ export const dummyCoins: Coin[] = [
     image: "/images/rupee.png",
     description: "Special edition 10 rupee coin.",
     weight: "7.71g",
-    sellerId: "seller_5",
+    sellerId: "sarah",
   },
   {
     id: "coin_16",
@@ -250,7 +250,7 @@ export const dummyCoins: Coin[] = [
     description: "Tsar Nicholas II portrait silver rouble.",
     weight: "20g",
     mint: "St. Petersburg",
-    sellerId: "seller_2",
+    sellerId: "peter",
   },
   {
     id: "coin_17",
@@ -265,7 +265,7 @@ export const dummyCoins: Coin[] = [
     image: "/images/owl.png",
     description: "One of the earliest coins ever minted in human history. Features roaring lion.",
     weight: "14.1g",
-    sellerId: "seller_4",
+    sellerId: "david",
     certification: "NGC Choice Fine"
   },
   {
@@ -282,7 +282,7 @@ export const dummyCoins: Coin[] = [
     description: "Stunning proof quality coin featuring a kangaroo.",
     weight: "31.1g",
     mint: "Perth Mint",
-    sellerId: "seller_1",
+    sellerId: "james",
   },
   {
     id: "coin_19",
@@ -296,7 +296,7 @@ export const dummyCoins: Coin[] = [
     rarity: "Scarce",
     image: "/images/banknote.png",
     description: "Vintage 10,000 Yen note with Prince Shotoku.",
-    sellerId: "seller_5",
+    sellerId: "sarah",
   },
   {
     id: "coin_20",
@@ -311,6 +311,6 @@ export const dummyCoins: Coin[] = [
     image: "/images/sovereign.png",
     description: "Jahangir reign gold Mohur, heavy and rich in script.",
     weight: "10.9g",
-    sellerId: "seller_2",
+    sellerId: "peter",
   }
 ];
