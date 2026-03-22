@@ -24,13 +24,16 @@ export default function ProfilePage() {
 
   if (!user) return null;
 
-  const activeListingsCount = coins.filter(c => c.sellerId === user.id).length;
-  const itemsForSaleCount = collectionItems.filter(c => c.isForSale).length + activeListingsCount;
+  const uniqueListingsMap = new Map();
+  coins.filter(c => c.sellerId === user.id).forEach(c => uniqueListingsMap.set(c.id, c));
+  const activeSellerListings = Array.from(uniqueListingsMap.values()) as typeof coins;
+  
+  const activeListingsCount = activeSellerListings.length;
+  // const itemsForSaleCount = collectionItems.filter(c => c.isForSale).length + activeListingsCount; (unused anyway)
   
   const isSeller = user.role === 'seller' || user.role === 'both';
   const isBuyer = user.role === 'buyer' || user.role === 'both';
   
-  const activeSellerListings = coins.filter(c => c.sellerId === user.id);
   const inventoryValue = activeSellerListings.reduce((sum, item) => sum + item.price, 0);
 
   return (

@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
 import Link from 'next/link';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '@/lib/firebase';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -12,29 +15,37 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password) {
       setError('Please fill all fields');
       return;
     }
     
-    // Simulate auth check by searching localStorage dummy user lists 
-    // Wait, the prompt says "If email/password exist in localStorage -> login success".
-    // Since we don't have a backend we'll simulate it by checking a generic 'users' key.
-    
-    const storedUsers = JSON.parse(localStorage.getItem('registered_users') || '[]');
-    const user = storedUsers.find((u: any) => u.email === email && u.password === password);
-
-    if (user) {
-      login({ id: user.id, name: user.name, email: user.email, role: user.role || 'buyer' });
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      let role = 'buyer';
+      let name = email.split('@')[0];
+      
+      if (userDoc.exists()) {
+        const data = userDoc.data();
+        role = data.role || 'buyer';
+        name = data.name || name;
+      }
+      
+      login({ id: user.uid, name, email, role: role as 'buyer' | 'seller' | 'both' });
       router.push('/profile');
-    } else if (email === 'dhanush@example.com' && password === 'password') {
-      // Fallback dummy user based on instructions
-      login({ id: 'user_1', name: 'Dhanush', email: 'dhanush@example.com', role: 'both' });
-      router.push('/profile');
-    } else {
-      setError('Invalid credentials. Please register if you do not have an account.');
+    } catch (err: any) {
+      if (email === 'dhanush@example.com' && password === 'password') {
+        // Fallback dummy user based on instructions
+        login({ id: 'user_1', name: 'Dhanush', email: 'dhanush@example.com', role: 'both' });
+        router.push('/profile');
+      } else {
+        setError(err.message || 'Invalid credentials.');
+      }
     }
   };
 

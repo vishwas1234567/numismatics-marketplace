@@ -1,28 +1,49 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 import { Coin } from '@/types/coin';
+import { collection, onSnapshot, doc, setDoc, deleteDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 interface WishlistState {
   wishlistItems: Coin[];
-  addToWishlist: (coin: Coin) => void;
-  removeFromWishlist: (id: string) => void;
+  userId: string | null;
+  loading: boolean;
+  unsubscribe: (() => void) | null;
+  initWishlist: (userId: string) => void;
+  addToWishlist: (coin: Coin) => Promise<void>;
+  removeFromWishlist: (id: string) => Promise<void>;
 }
 
-export const useWishlistStore = create<WishlistState>()(
-  persist(
-    (set) => ({
-      wishlistItems: [],
-      addToWishlist: (coin) =>
-        set((state) => ({
-          wishlistItems: state.wishlistItems.find((c) => c.id === coin.id)
-            ? state.wishlistItems
-            : [...state.wishlistItems, coin],
-        })),
-      removeFromWishlist: (id) =>
-        set((state) => ({
-          wishlistItems: state.wishlistItems.filter((c) => c.id !== id),
-        })),
-    }),
-    { name: 'wishlist' }
-  )
-);
+export const useWishlistStore = create<WishlistState>((set, get) => ({
+  wishlistItems: [],
+  userId: null,
+  loading: true,
+  unsubscribe: null,
+  initWishlist: (userId) => {
+    const prevUnsub = get().unsubscribe;
+    if (prevUnsub) prevUnsub();
+
+    set({ userId, loading: true });
+    if (!userId) {
+      set({ wishlistItems: [], loading: false, unsubscribe: null });
+      return;
+    }
+
+    const colRef = collection(db, 'users', userId, 'wishlist');
+    const unsubscribe = onSnapshot(colRef, (snapshot) => {
+      const items: Coin[] = [];
+      snapshot.forEach(d => items.push(d.data() as Coin));
+      set({ wishlistItems: items, loading: false });
+    });
+    set({ unsubscribe });
+  },
+  addToWishlist: async (coin) => {
+    const { userId } = get();
+    if (!userId) return;
+    await setDoc(doc(db, 'users', userId, 'wishlist', coin.id), coin);
+  },
+  removeFromWishlist: async (id) => {
+    const { userId } = get();
+    if (!userId) return;
+    await deleteDoc(doc(db, 'users', userId, 'wishlist', id));
+  },
+}));

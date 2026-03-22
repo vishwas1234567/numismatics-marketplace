@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { formatCurrency } from '@/utils/helpers';
-import { Plus, Trash2, Edit2, Tag } from 'lucide-react';
+import { Plus, Trash2, Tag } from 'lucide-react';
 import { CollectionItem } from '@/types/user';
 import { CoinCondition, RarityLevel } from '@/types/coin';
 
@@ -15,7 +15,7 @@ export default function CollectionPage() {
   const { user } = useAuthStore();
   const router = useRouter();
   const { collectionItems, markForSale, addItem, removeItem } = useCollectionStore();
-  const { addListing, removeListing } = useListingStore();
+  const { coins, addListing, removeListing } = useListingStore();
   const [showAddForm, setShowAddForm] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -40,18 +40,37 @@ export default function CollectionPage() {
 
   if (!user) return null;
 
-  const handleToggleForSale = (item: CollectionItem) => {
+  // Unified list: Combines explicitly saved collection items WITH their live market listings
+  const userListings = coins.filter(c => c.sellerId === user.id);
+  const unifiedItems = [...collectionItems];
+  userListings.forEach(listing => {
+    if (!unifiedItems.some(item => item.id === listing.id)) {
+      unifiedItems.push({
+        ...listing,
+        isForSale: true
+      });
+    }
+  });
+
+  const handleToggleForSale = async (item: CollectionItem) => {
     const newIsForSale = !item.isForSale;
-    markForSale(item.id, newIsForSale);
+    
+    // Ensure the item exists in the personal collection before we unlist it from the global market
+    // This prevents pre-seeded global dummy items from vanishing completely when unlisted
+    if (!collectionItems.some(c => c.id === item.id)) {
+      await addItem({ ...item, isForSale: false }); // Add to collection immediately
+    }
+    
+    await markForSale(item.id, newIsForSale);
     
     if (newIsForSale) {
-      addListing({ ...item, sellerId: user.id });
+      await addListing({ ...item, sellerId: user.id });
     } else {
-      removeListing(item.id);
+      await removeListing(item.id);
     }
   };
 
-  const handleAddItem = (e: React.FormEvent) => {
+  const handleAddItem = async (e: React.FormEvent) => {
     e.preventDefault();
     const newItem: CollectionItem = {
       id: `col_${Date.now()}`,
@@ -67,7 +86,7 @@ export default function CollectionPage() {
       isForSale: false,
       sellerId: user.id
     };
-    addItem(newItem);
+    await addItem(newItem);
     setShowAddForm(false);
   };
 
@@ -123,7 +142,7 @@ export default function CollectionPage() {
           </div>
         )}
 
-        {collectionItems.length === 0 ? (
+        {unifiedItems.length === 0 ? (
           <div className="text-center py-20 bg-white dark:bg-zinc-950 rounded-2xl border border-zinc-200 dark:border-zinc-800">
             <div className="w-16 h-16 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center mx-auto mb-4 text-zinc-400">
               <Image src="/images/rupee.png" alt="Empty" width={40} height={40} className="opacity-50 grayscale rounded-full" />
@@ -133,7 +152,7 @@ export default function CollectionPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {collectionItems.map((item) => (
+            {unifiedItems.map((item) => (
               <div key={item.id} className="bg-white dark:bg-zinc-950 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden flex flex-col">
                 <div className="relative h-48 bg-zinc-100 dark:bg-zinc-900 p-4 shrink-0 flex items-center justify-center">
                   <Image src={item.image} alt={item.title} fill className="object-cover" />
@@ -143,10 +162,10 @@ export default function CollectionPage() {
                     </span>
                   )}
                   <button 
-                    onClick={() => {
-                      removeItem(item.id);
+                    onClick={async () => {
+                      await removeItem(item.id);
                       if (item.isForSale) {
-                        removeListing(item.id);
+                        await removeListing(item.id);
                       }
                     }} 
                     className="absolute top-3 right-3 p-1.5 bg-white/80 dark:bg-black/50 hover:bg-red-100 dark:hover:bg-red-900/50 text-red-500 rounded-lg transition-colors shadow"

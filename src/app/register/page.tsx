@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
 import Link from 'next/link';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, db } from '@/lib/firebase';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -11,31 +14,35 @@ export default function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState<'buyer' | 'seller' | 'both'>('buyer');
+  const [role, setRole] = useState<'buyer' | 'seller'>('buyer');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email || !password) {
       setError('Please fill all fields');
       return;
     }
 
-    const storedUsers = JSON.parse(localStorage.getItem('registered_users') || '[]');
-    const userExists = storedUsers.some((u: any) => u.email === email);
-
-    if (userExists) {
-      setError('User with this email already exists.');
-      return;
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      
+      const newUser = { id: user.uid, name, email, role };
+      
+      await setDoc(doc(db, 'users', user.uid), {
+        name,
+        email,
+        role,
+        createdAt: new Date().toISOString()
+      });
+      
+      // Auto login
+      login(newUser);
+      router.push('/profile');
+    } catch (err: any) {
+      setError(err.message || 'Failed to create an account');
     }
-
-    const newUser = { id: `user_${Date.now()}`, name, email, password, role };
-    storedUsers.push(newUser);
-    localStorage.setItem('registered_users', JSON.stringify(storedUsers));
-    
-    // Auto login
-    login({ id: newUser.id, name: newUser.name, email: newUser.email, role: newUser.role });
-    router.push('/profile');
   };
 
   return (
@@ -105,7 +112,6 @@ export default function RegisterPage() {
                 />
               </div>
             </div>
-
             <div>
               <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">
                 I am here to
@@ -118,7 +124,6 @@ export default function RegisterPage() {
                 >
                   <option value="buyer">Buy Rare Items</option>
                   <option value="seller">Sell My Collection</option>
-                  <option value="both">Both Buy and Sell</option>
                 </select>
               </div>
             </div>

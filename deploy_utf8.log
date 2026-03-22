@@ -1,0 +1,503 @@
+﻿[2026-03-22T07:23:11.733Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[2026-03-22T07:23:11.734Z] > authorizing via signed-in user (dhanushdg0710@gmail.com)
+[2026-03-22T07:23:11.734Z] [iam] checking project numismatics-web-app for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[2026-03-22T07:23:11.735Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:23:11.735Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:23:11.736Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/numismatics-web-app:testIamPermissions [none]
+[2026-03-22T07:23:11.736Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/numismatics-web-app:testIamPermissions  x-goog-user-project=numismatics-web-app
+[2026-03-22T07:23:11.737Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/numismatics-web-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[2026-03-22T07:23:13.141Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/numismatics-web-app:testIamPermissions 200
+[2026-03-22T07:23:13.141Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/numismatics-web-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[2026-03-22T07:23:13.143Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:23:13.144Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:23:13.145Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/numismatics-web-app [none]
+[2026-03-22T07:23:13.839Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/numismatics-web-app 200
+[2026-03-22T07:23:13.840Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/numismatics-web-app {"projectId":"numismatics-web-app","projectNumber":"118555096262","displayName":"Numismatics-web-app","name":"projects/numismatics-web-app","resources":{"hostingSite":"numismatics-web-app"},"state":"ACTIVE","etag":"1_b9ee45b4-c50c-416a-985d-e83fcc64f5ac"}
+[2026-03-22T07:23:16.001Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:23:16.002Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:23:16.002Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/numismatics-web-app/sites pageToken=&pageSize=10
+[2026-03-22T07:23:17.239Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/numismatics-web-app/sites 200
+[2026-03-22T07:23:17.240Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/numismatics-web-app/sites {"sites":[{"name":"projects/numismatics-web-app/sites/numismatics-web-app","defaultUrl":"https://numismatics-web-app.web.app","type":"DEFAULT_SITE"}]}
+[2026-03-22T07:23:17.242Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:23:17.242Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:23:17.243Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/numismatics-web-app/sites 
+[2026-03-22T07:23:17.943Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/numismatics-web-app/sites 200
+[2026-03-22T07:23:17.944Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/numismatics-web-app/sites {"sites":[{"name":"projects/numismatics-web-app/sites/numismatics-web-app","defaultUrl":"https://numismatics-web-app.web.app","type":"DEFAULT_SITE"}]}
+[2026-03-22T07:23:17.944Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:23:17.945Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:23:17.945Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/numismatics-web-app/webApps/-/config [none]
+[2026-03-22T07:23:18.900Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/numismatics-web-app/webApps/-/config 200
+[2026-03-22T07:23:18.901Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/numismatics-web-app/webApps/-/config {"projectId":"numismatics-web-app","appId":"1:118555096262:web:073409fddac5b26ef313c7","storageBucket":"numismatics-web-app.firebasestorage.app","apiKey":"AIzaSyBHJy4nxrVFbW8aN3w_icufQFLrTdoRp0A","authDomain":"numismatics-web-app.firebaseapp.com","messagingSenderId":"118555096262","measurementId":"G-FWD1S4F3RT","projectNumber":"118555096262","version":"2"}
+node.exe : No Firebase app 
+associated with site 
+numismatics-web-app, 
+injecting project default 
+config.
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~
+    + CategoryInfo           
+   : NotSpecified: (No Fire  
+  base app...default confi   
+ g.:String) [], RemoteExc    
+eption
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+  You can link a Web app to 
+a Hosting site here https://c
+onsole.firebase.google.com/pr
+oject/numismatics-web-app/set
+tings/general/web
+
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 15.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[2026-03-22T07:23:24.557Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:23:24.557Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:23:24.557Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/numismatics-web-app/sites/numismatics-web-app [none]
+[2026-03-22T07:23:25.684Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/numismatics-web-app/sites/numismatics-web-app 200
+[2026-03-22T07:23:25.685Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/numismatics-web-app/sites/numismatics-web-app {"name":"projects/numismatics-web-app/sites/numismatics-web-app","defaultUrl":"https://numismatics-web-app.web.app","type":"DEFAULT_SITE"}
+Γû▓ Next.js 16.1.6 (Turbopack)
+
+
+
+  Creating an optimized production build ...
+
+
+
+[139.86ms] [@tailwindcss/postcss] src\app\globals.css
+[  0.09ms]   Γå│ Quick bail check
+[ 34.57ms]   Γå│ Setup compiler
+[  0.21ms]     Γå│ PostCSS AST -> Tailwind CSS AST
+[ 34.33ms]     Γå│ Create compiler
+[  0.18ms]   Γå│ Register full rebuild paths
+[  2.15ms]   Γå│ Setup scanner
+
+[ 19.65ms]   Γå│ Scan for candidates
+[  7.16ms]   Γå│ Register dependency messages
+[ 41.22ms]   Γå│ Build utilities
+[ 30.09ms]   Γå│ Optimization
+[  0.88ms]     Γå│ AST -> CSS
+[ 18.25ms]     Γå│ Lightning CSS
+
+[ 10.90ms]     Γå│ CSS -> PostCSS AST
+[  4.22ms]   Γå│ Update PostCSS AST
+
+
+Γ£ô Compiled successfully in 3.8s
+
+  Running TypeScript ...
+
+  Collecting page data using 11 workers ...
+
+  Generating static pages using 11 workers (0/15) ...
+
+  Generating static pages using 11 workers (3/15) 
+
+  Generating static pages using 11 workers (7/15) 
+
+  Generating static pages using 11 workers (11/15) 
+
+Γ£ô Generating static pages using 11 workers (15/15) in 511.1ms
+
+  Finalizing page optimization ...
+
+
+
+Route (app)
+Γöî Γùï /
+Γö£ Γùï /_not-found
+Γö£ Γùï /cart
+Γö£ Γùï /checkout
+Γö£ Γùï /collection
+Γö£ Γùï /login
+Γö£ Γùï /marketplace
+Γö£ Γùï /messages
+Γö£ ╞Æ /product/[id]
+Γö£ Γùï /profile
+Γö£ Γùï /register
+Γö£ Γùï /sell
+Γö£ ╞Æ /seller/[id]
+Γö£ Γùï /success
+Γöö Γùï /wishlist
+
+
+
+Γùï  (Static)   prerendered as static content
+╞Æ  (Dynamic)  server-rendered on demand
+
+
+Building a Cloud Function to run this application. This is needed due to:
+ ΓÇó non-static component /product/[id]/page
+ ΓÇó non-static component /seller/[id]/page
+
+[2026-03-22T07:23:38.064Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:23:38.065Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:23:38.065Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/numismatics-web-app/sites/numismatics-web-app [none]
+[2026-03-22T07:23:39.207Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/numismatics-web-app/sites/numismatics-web-app 200
+[2026-03-22T07:23:39.207Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/numismatics-web-app/sites/numismatics-web-app {"name":"projects/numismatics-web-app/sites/numismatics-web-app","defaultUrl":"https://numismatics-web-app.web.app","type":"DEFAULT_SITE"}
+npm warn EBADENGINE 
+Unsupported engine {
+npm warn EBADENGINE   
+package: 
+'firebase-frameworks@0.11.8',
+npm warn EBADENGINE   
+required: { node: '^16.0.0 
+|| ^18.0.0 || ^20.0.0 || 
+^22.0.0' },
+npm warn EBADENGINE   
+current: { node: 'v24.12.0', 
+npm: '11.6.2' }
+npm warn EBADENGINE }
+npm warn deprecated 
+inflight@1.0.6: This module 
+is not supported, and leaks 
+memory. Do not use it. Check 
+out lru-cache if you want a 
+good and tested way to 
+coalesce async requests by a 
+key value, which is much 
+more comprehensive and 
+powerful.
+npm warn deprecated 
+glob@8.1.0: Old versions of 
+glob are not supported, and 
+contain widely publicized 
+security vulnerabilities, 
+which have been fixed in the 
+current version. Please 
+update. Support for old 
+versions may be purchased 
+(at exorbitant rates) by 
+contacting i@izs.me
+npm warn deprecated 
+google-p12-pem@4.0.1: 
+Package is no longer 
+maintained
+
+added 376 packages in 34s
+
+44 packages are looking for funding
+  run `npm fund` for details
+[2026-03-22T07:24:14.648Z] [web frameworks] effective firebase.json:  {
+  "hosting": [
+    {
+      "source": ".",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "frameworksBackend": {
+        "region": "us-central1"
+      },
+      "site": "numismatics-web-app",
+      "rewrites": [
+        {
+          "source": "/**",
+          "function": {
+            "functionId": "ssrnumismaticswebapp",
+            "region": "us-central1",
+            "pinTag": true
+          }
+        }
+      ],
+      "redirects": [],
+      "headers": [
+        {
+          "source": "/_global-error",
+          "headers": [
+            {
+              "key": "x-nextjs-stale-time",
+              "value": "300"
+            },
+            {
+              "key": "x-nextjs-prerender",
+              "value": "1"
+            },
+            {
+              "key": "x-next-cache-tags",
+              "value": "_N_T_/layout,_N_T_/_global-error/layout,_N_T_/_global-error/page,_N_T_/_global-error"
+            }
+          ]
+        },
+        {
+          "source": "/checkout",
+          "headers": [
+            {
+              "key": "x-nextjs-stale-time",
+              "value": "300"
+            },
+            {
+              "key": "x-nextjs-prerender",
+              "value": "1"
+            },
+            {
+              "key": "x-next-cache-tags",
+              "value": "_N_T_/layout,_N_T_/checkout/layout,_N_T_/checkout/page,_N_T_/checkout"
+            }
+          ]
+        },
+        {
+          "source": "/collection",
+          "headers": [
+            {
+              "key": "x-nextjs-stale-time",
+              "value": "300"
+            },
+            {
+              "key": "x-nextjs-prerender",
+              "value": "1"
+            },
+            {
+              "key": "x-next-cache-tags",
+              "value": "_N_T_/layout,_N_T_/collection/layout,_N_T_/collection/page,_N_T_/collection"
+            }
+          ]
+        },
+        {
+          "source": "/favicon.ico",
+          "headers": [
+            {
+              "key": "cache-control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "content-type",
+              "value": "image/x-icon"
+            },
+            {
+              "key": "x-next-cache-tags",
+              "value": "_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico"
+            }
+          ]
+        },
+        {
+          "source": "/login",
+          "headers": [
+            {
+              "key": "x-nextjs-stale-time",
+              "value": "300"
+            },
+            {
+              "key": "x-nextjs-prerender",
+              "value": "1"
+            },
+            {
+              "key": "x-next-cache-tags",
+              "value": "_N_T_/layout,_N_T_/login/layout,_N_T_/login/page,_N_T_/login"
+            }
+          ]
+        },
+        {
+          "source": "/marketplace",
+          "headers": [
+            {
+              "key": "x-nextjs-stale-time",
+              "value": "300"
+            },
+            {
+              "key": "x-nextjs-prerender",
+              "value": "1"
+            },
+            {
+              "key": "x-next-cache-tags",
+              "value": "_N_T_/layout,_N_T_/marketplace/layout,_N_T_/marketplace/page,_N_T_/marketplace"
+            }
+          ]
+        },
+        {
+          "source": "/register",
+          "headers": [
+            {
+              "key": "x-nextjs-stale-time",
+              "value": "300"
+            },
+            {
+              "key": "x-nextjs-prerender",
+              "value": "1"
+            },
+            {
+              "key": "x-next-cache-tags",
+              "value": "_N_T_/layout,_N_T_/register/layout,_N_T_/register/page,_N_T_/register"
+            }
+          ]
+        },
+        {
+          "source": "/cart",
+          "headers": [
+            {
+              "key": "x-nextjs-stale-time",
+              "value": "300"
+            },
+            {
+              "key": "x-nextjs-prerender",
+              "value": "1"
+            },
+            {
+              "key": "x-next-cache-tags",
+              "value": "_N_T_/layout,_N_T_/cart/layout,_N_T_/cart/page,_N_T_/cart"
+            }
+          ]
+        },
+        {
+          "source": "/_not-found",
+          "headers": [
+            {
+              "key": "x-nextjs-stale-time",
+              "value": "300"
+            },
+            {
+              "key": "x-nextjs-prerender",
+              "value": "1"
+            },
+            {
+              "key": "x-next-cache-tags",
+              "value": "_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found"
+            }
+          ]
+        },
+        {
+          "source": "/sell",
+          "headers": [
+            {
+              "key": "x-nextjs-stale-time",
+              "value": "300"
+            },
+            {
+              "key": "x-nextjs-prerender",
+              "value": "1"
+            },
+            {
+              "key": "x-next-cache-tags",
+              "value": "_N_T_/layout,_N_T_/sell/layout,_N_T_/sell/page,_N_T_/sell"
+            }
+          ]
+        },
+        {
+          "source": "/profile",
+          "headers": [
+            {
+              "key": "x-nextjs-stale-time",
+              "value": "300"
+            },
+            {
+              "key": "x-nextjs-prerender",
+              "value": "1"
+            },
+            {
+              "key": "x-next-cache-tags",
+              "value": "_N_T_/layout,_N_T_/profile/layout,_N_T_/profile/page,_N_T_/profile"
+            }
+          ]
+        },
+        {
+          "source": "/messages",
+          "headers": [
+            {
+              "key": "x-nextjs-stale-time",
+              "value": "300"
+            },
+            {
+              "key": "x-nextjs-prerender",
+              "value": "1"
+            },
+            {
+              "key": "x-next-cache-tags",
+              "value": "_N_T_/layout,_N_T_/messages/layout,_N_T_/messages/page,_N_T_/messages"
+            }
+          ]
+        },
+        {
+          "source": "/wishlist",
+          "headers": [
+            {
+              "key": "x-nextjs-stale-time",
+              "value": "300"
+            },
+            {
+              "key": "x-nextjs-prerender",
+              "value": "1"
+            },
+            {
+              "key": "x-next-cache-tags",
+              "value": "_N_T_/layout,_N_T_/wishlist/layout,_N_T_/wishlist/page,_N_T_/wishlist"
+            }
+          ]
+        },
+        {
+          "source": "/success",
+          "headers": [
+            {
+              "key": "x-nextjs-stale-time",
+              "value": "300"
+            },
+            {
+              "key": "x-nextjs-prerender",
+              "value": "1"
+            },
+            {
+              "key": "x-next-cache-tags",
+              "value": "_N_T_/layout,_N_T_/success/layout,_N_T_/success/page,_N_T_/success"
+            }
+          ]
+        },
+        {
+          "source": "/**/*.[jt]s",
+          "headers": [
+            {
+              "key": "Set-Cookie",
+              "value": "__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoibnVtaXNtYXRpY3Mtd2ViLWFwcCIsImFwcElkIjoiMToxMTg1NTUwOTYyNjI6d2ViOjA3MzQwOWZkZGFjNWIyNmVmMzEzYzciLCJzdG9yYWdlQnVja2V0IjoibnVtaXNtYXRpY3Mtd2ViLWFwcC5maXJlYmFzZXN0b3JhZ2UuYXBwIiwiYXBpS2V5IjoiQUl6YVN5QkhKeTRueHJWRmJXOGFOM3dfaWN1ZlFGTHJUZG9ScDBBIiwiYXV0aERvbWFpbiI6Im51bWlzbWF0aWNzLXdlYi1hcHAuZmlyZWJhc2VhcHAuY29tIiwibWVzc2FnaW5nU2VuZGVySWQiOiIxMTg1NTUwOTYyNjIiLCJtZWFzdXJlbWVudElkIjoiRy1GV0QxUzRGM1JUIiwicHJvamVjdE51bWJlciI6IjExODU1NTA5NjI2MiIsInZlcnNpb24iOiIyIn0sIl9hdXRoVG9rZW5TeW5jVVJMIjoiL19fc2Vzc2lvbiJ9; SameSite=Strict; Expires=2028-02-14T18:04:14.648Z; Path=/;"
+            }
+          ]
+        }
+      ],
+      "cleanUrls": true,
+      "trailingSlash": false,
+      "public": ".firebase\\numismatics-web-app\\hosting",
+      "webFramework": "next_ssr"
+    }
+  ],
+  "functions": [
+    {
+      "source": ".firebase\\numismatics-web-app\\functions",
+      "codebase": "firebase-frameworks-numismatics-web-app"
+    }
+  ]
+}
+[2026-03-22T07:24:14.648Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[2026-03-22T07:24:14.650Z] > authorizing via signed-in user (dhanushdg0710@gmail.com)
+[2026-03-22T07:24:14.650Z] [iam] checking project numismatics-web-app for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[2026-03-22T07:24:14.650Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:24:14.650Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:24:14.650Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/numismatics-web-app:testIamPermissions [none]
+[2026-03-22T07:24:14.650Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/numismatics-web-app:testIamPermissions  x-goog-user-project=numismatics-web-app
+[2026-03-22T07:24:14.650Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/numismatics-web-app:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[2026-03-22T07:24:16.017Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/numismatics-web-app:testIamPermissions 200
+[2026-03-22T07:24:16.017Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/numismatics-web-app:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[2026-03-22T07:24:16.018Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:24:16.018Z] Checked if tokens are valid: true, expires at: 1774167698597
+[2026-03-22T07:24:16.018Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/numismatics-web-app/locations/-/functions [none]
+[2026-03-22T07:24:16.571Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/numismatics-web-app/locations/-/functions 403
+[2026-03-22T07:24:16.571Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/numismatics-web-app/locations/-/functions {"error":{"code":403,"message":"Cloud Functions API has not been used in project numismatics-web-app before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/cloudfunctions.googleapis.com/overview?project=numismatics-web-app then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"service":"cloudfunctions.googleapis.com","serviceTitle":"Cloud Functions API","containerInfo":"numismatics-web-app","consumer":"projects/numismatics-web-app","activationUrl":"https://console.developers.google.com/apis/api/cloudfunctions.googleapis.com/overview?project=numismatics-web-app"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Cloud Functions API has not been used in project numismatics-web-app before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/cloudfunctions.googleapis.com/overview?project=numismatics-web-app then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/cloudfunctions.googleapis.com/overview?project=numismatics-web-app"}]}]}}
+[2026-03-22T07:24:16.572Z] [functions] failed to list functions for numismatics-web-app
+[2026-03-22T07:24:16.572Z] [functions] Request to https://cloudfunctions.googleapis.com/v1/projects/numismatics-web-app/locations/-/functions had HTTP Error: 403, Cloud Functions API has not been used in project numismatics-web-app before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/cloudfunctions.googleapis.com/overview?project=numismatics-web-app then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.
+[2026-03-22T07:24:16.883Z] FirebaseError: Request to https://cloudfunctions.googleapis.com/v1/projects/numismatics-web-app/locations/-/functions had HTTP Error: 403, Cloud Functions API has not been used in project numismatics-web-app before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/cloudfunctions.googleapis.com/overview?project=numismatics-web-app then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.
+    at responseToError (C:\Users\lenovo\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:53:12)
+    at RetryOperation._fn (C:\Users\lenovo\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:330:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+
+Error: Failed to list functions for numismatics-web-app

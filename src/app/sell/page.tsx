@@ -46,7 +46,7 @@ export default function SellPage() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
@@ -69,16 +69,18 @@ export default function SellPage() {
       certification: formData.certification
     };
 
-    // Simulate network delay
-    setTimeout(() => {
-      addListing(newListing);
+    try {
+      await addListing(newListing);
       setIsSubmitting(false);
       setSuccess(true);
       
       setTimeout(() => {
         router.push('/marketplace');
       }, 2000);
-    }, 1000);
+    } catch (err) {
+      console.error('Failed to add listing', err);
+      setIsSubmitting(false);
+    }
   };
 
   if (success) {

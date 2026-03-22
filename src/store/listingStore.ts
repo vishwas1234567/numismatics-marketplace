@@ -1,40 +1,53 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 import { Coin } from '@/types/coin';
+import { collection, onSnapshot, doc, setDoc, deleteDoc, updateDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 import { dummyCoins } from '@/data/coins';
 
 interface ListingState {
   coins: Coin[];
-  addListing: (coin: Coin) => void;
-  removeListing: (id: string) => void;
-  updateListing: (id: string, updates: Partial<Coin>) => void;
+  loading: boolean;
+  initListings: () => void;
+  addListing: (coin: Coin) => Promise<void>;
+  removeListing: (id: string) => Promise<void>;
+  updateListing: (id: string, updates: Partial<Coin>) => Promise<void>;
 }
 
-export const useListingStore = create<ListingState>()(
-  persist(
-    (set) => ({
-      coins: dummyCoins, // default
-      addListing: (coin) => set((state) => ({ coins: [...state.coins, coin] })),
-      removeListing: (id) => set((state) => ({ coins: state.coins.filter((c) => c.id !== id) })),
-      updateListing: (id, updates) =>
-        set((state) => ({
-          coins: state.coins.map((c) => (c.id === id ? { ...c, ...updates } : c)),
-        })),
-    }),
-    { 
-      name: 'market_listings',
-      version: 1,
-      migrate: (persistedState: any, version: number) => {
-        if (version === 0) {
-          const mapping: Record<string, string> = { "seller_1": "james", "seller_2": "peter", "seller_3": "michael", "seller_4": "david", "seller_5": "sarah" };
-          const mappedCoins = (persistedState.coins || []).map((c: any) => ({
-            ...c,
-            sellerId: mapping[c.sellerId] || c.sellerId
-          }));
-          return { ...persistedState, coins: mappedCoins };
+let initialized = false;
+
+export const useListingStore = create<ListingState>((set) => ({
+  coins: [],
+  loading: true,
+  initListings: () => {
+    if (initialized) return;
+    initialized = true;
+    const colRef = collection(db, 'listings');
+    onSnapshot(colRef, async (snapshot) => {
+      const items: Coin[] = [];
+      snapshot.forEach(d => {
+        items.push(d.data() as Coin);
+      });
+      
+      // Seed initial dummy listings if completely empty
+      if (items.length === 0 && snapshot.metadata.fromCache === false) {
+        set({ loading: false }); // Render empty first, seed async
+        for (const coin of dummyCoins) {
+          try {
+            await setDoc(doc(db, 'listings', coin.id), coin);
+          } catch(e) {}
         }
-        return persistedState;
+      } else {
+        set({ coins: items, loading: false });
       }
-    }
-  )
-);
+    });
+  },
+  addListing: async (coin) => {
+    await setDoc(doc(db, 'listings', coin.id), coin);
+  },
+  removeListing: async (id) => {
+    await deleteDoc(doc(db, 'listings', id));
+  },
+  updateListing: async (id, updates) => {
+    await updateDoc(doc(db, 'listings', id), updates);
+  },
+}));
